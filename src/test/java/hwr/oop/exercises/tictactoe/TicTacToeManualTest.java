@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 class TicTacToeManualTest {
+int pointsX, pointsO = 0;
 
     TicTacToe game;
     PrintStream out;
@@ -33,7 +34,16 @@ class TicTacToeManualTest {
             printCurrentStateOfGame();
             currentTurn++;
         }
-        out.println("Game over!");
+        if (game.playerXWon()){
+            out.println("Spieler mit X hat gewonnen! LOL");
+             this.pointsX++;
+        }else {
+            out.println("Spieler mit O hat gewonnen! LEL");
+            this.pointsO++;
+        }
+        out.println("Game over! X:"+this.pointsX+ " O:"+ this.pointsO);
+        this.setUp();
+        this.playUntilGameOver();
     }
 
     void initializeVisualCues() {
@@ -46,7 +56,7 @@ class TicTacToeManualTest {
     void playMoveNumber(int turnNumber) {
         boolean firstPlayer = turnNumber % 2 == 0;
         String help = firstPlayer ? "A" : "B";
-        out.println("Now Player " + help + "s turn!");
+        out.println("Now Player " + help + "'s turn!");
         out.print("X: ");
         int x = in.nextInt();
         out.print("Y: ");
